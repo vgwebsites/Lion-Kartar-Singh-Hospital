@@ -9,10 +9,10 @@ As approved, this uses Vercel Node.js serverless APIs and Supabase instead of Ex
 ## Install and run
 
 1. `npm ci`
-2. Configure a Supabase project in the root `.env` using `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, and the server-only `SUPABASE_SERVICE_ROLE_KEY`. Never put the service-role key in a `VITE_` variable or frontend code.
+2. Configure a Supabase project in the root `.env` using `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, and the server-only `SUPABASE_SERVICE_ROLE_KEY`. Set `VITE_WHATSAPP_NUMBER=919420069834` for the public Click-to-Chat contact. Never put the service-role key in a `VITE_` variable or frontend code.
 3. `npm run build` runs TypeScript checks and creates the production bundle.
 4. `npm run dev` runs Vite with the project's API handlers mounted for local development. `npm run dev:vercel` runs the app through Vercel's local runtime when you need deployment parity.
-5. Deploy to Vercel with the server/public environment variables. The existing configuration preserves those variables and adds nested-page routing.
+5. Deploy to Vercel with the server/public environment variables, including `VITE_WHATSAPP_NUMBER`. Vite embeds `VITE_` values at build time, so add the number to every needed Vercel environment (Production and Preview) and redeploy after changing it. The existing configuration preserves those variables and adds nested-page routing.
 
 ## Supabase database setup
 

@@ -1,4 +1,4 @@
-import { HOSPITAL_WHATSAPP_NUMBER } from '../config/contact';
+const configuredPhoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER?.replace(/\D/g, '') ?? '';
 
 interface AppointmentMessageDetails {
   patientName: string;
@@ -9,7 +9,12 @@ interface AppointmentMessageDetails {
   doctor?: string;
 }
 
-export function buildAppointmentWhatsAppUrl(details: AppointmentMessageDetails): string {
+export function isWhatsAppConfigured(): boolean {
+  return /^\d{8,15}$/.test(configuredPhoneNumber);
+}
+
+export function buildAppointmentWhatsAppUrl(details: AppointmentMessageDetails): string | null {
+  if (!isWhatsAppConfigured()) return null;
   const message = [
     'Hello Lion Kartar Singh Hospital,',
     'I have submitted an appointment request through the website. Please confirm availability.',
@@ -22,5 +27,5 @@ export function buildAppointmentWhatsAppUrl(details: AppointmentMessageDetails):
     ...(details.doctor ? [`Preferred doctor: ${details.doctor}`] : []),
   ].join('\n');
 
-  return `https://wa.me/${HOSPITAL_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${configuredPhoneNumber}?text=${encodeURIComponent(message)}`;
 }
