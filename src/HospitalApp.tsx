@@ -1,0 +1,21 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { AuthProvider } from './components/AuthContext';
+import { ContentProvider } from './components/ContentContext';
+import Loader from './components/Loader';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const OurTeam = lazy(() => import('./pages/OurTeam'));
+const Departments = lazy(() => import('./pages/Departments'));
+const ContactUs = lazy(() => import('./pages/ContactUs'));
+const BookAppointment = lazy(() => import('./pages/BookAppointment'));
+const Information = lazy(() => import('./pages/Information'));
+const Reviews = lazy(() => import('./pages/Reviews'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Login = lazy(() => import('./admin/Login'));
+const Dashboard = lazy(() => import('./admin/Dashboard'));
+import { handleGoogleRedirect } from './services/googleAuth';
+import './styles/site.css';
+void handleGoogleRedirect();
+export default function HospitalApp() { return <BrowserRouter><AuthProvider><ContentProvider><Suspense fallback={<Loader full />}><Routes><Route element={<Layout />}><Route index element={<Home />} /><Route path="about" element={<AboutUs />} /><Route path="team" element={<OurTeam />} /><Route path="departments" element={<Departments />} /><Route path="departments/:slug" element={<Departments />} /><Route path="contact" element={<ContactUs />} /><Route path="book-appointment" element={<BookAppointment />} /><Route path="reviews" element={<Reviews />} /><Route path="information" element={<Information />} /><Route path="privacy" element={<Information />} /><Route path="staff/login" element={<Login />} /><Route path="staff/dashboard" element={<Dashboard />} /><Route path="*" element={<NotFound />} /></Route></Routes></Suspense></ContentProvider></AuthProvider></BrowserRouter>; }

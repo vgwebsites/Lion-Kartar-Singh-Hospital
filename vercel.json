@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    {
+      "source": "/departments/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/staff/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/team",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/book-appointment",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/information",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/index.html"
+    }
+  ]
+}

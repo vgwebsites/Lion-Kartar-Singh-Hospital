@@ -1,0 +1,6 @@
+export interface Department { id: number; slug: string; name: string; icon: string; description: string; services: string[]; source_url: string; sort_order: number }
+export interface Doctor { id: number; name: string; qualification: string; specialty: string; experience: number | null; bio: string; department_id: number; source_url: string; initials: string }
+export interface Hospital { id: number; name: string; address: string; locality: string; city: string; maps_url: string; latitude: number; longitude: number; phone: string | null; email: string | null; hours: string | null; introduction: string; about: string; bed_count: number; verified_on: string; sources: { label: string; url: string }[] }
+export interface Content { hospital: Hospital; departments: Department[]; doctors: Doctor[] }
+export interface Appointment { id: string; reference: string; full_name: string; age: number; gender: string; mobile: string; email: string; department_id: number; doctor_id: number | null; preferred_date: string; preferred_time: string; reason: string; message: string; status: string; scheduled_date: string | null; scheduled_time: string | null; staff_note: string; created_at: string; status_history: { status: string; at: string }[] }
+export interface Inquiry { id: string; name: string; email: string; message: string; resolved: boolean; created_at: string }

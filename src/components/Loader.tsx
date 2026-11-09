@@ -1,0 +1,2 @@
+import { HeartPulse } from 'lucide-react';
+export default function Loader({ full = false }: { full?: boolean }) { return <div className={full ? 'loader full-loader' : 'loader'} role="status"><span className="loader-emblem"><HeartPulse size={32} /></span><strong>Lion Kartar Singh <span>Hospital</span></strong><div className="loader-track"><span /></div><span className="sr-only">Loading hospital information…</span></div>; }

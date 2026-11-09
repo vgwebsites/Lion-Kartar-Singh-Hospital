@@ -1,0 +1,3 @@
+html { scroll-behavior: smooth; }
+:where(a, div, section, article, header, footer, nav, aside, main, form, fieldset, ul, ol, li, span, h1, h2, h3, p) { box-sizing: border-box; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

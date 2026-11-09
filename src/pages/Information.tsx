@@ -1,0 +1,28 @@
+import { Link, useLocation } from 'react-router-dom';
+import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { useContent } from '../components/ContentContext';
+import PageIntro from '../components/PageIntro';
+export default function Information() {
+  const { hospital } = useContent();
+  const privacy = useLocation().pathname === '/privacy';
+  return <>
+    <PageIntro eyebrow={privacy ? 'Privacy & your information' : 'Information & sources'} title={privacy ? 'Your information deserves care.' : 'Clarity is part of good care.'} description={privacy ? 'How this portal collects, uses and protects the details you choose to share.' : 'What we verified, what is still unconfirmed, and how the content on this website was created.'} />
+    <article className="section container prose">{privacy ? <>
+      <h2>What is collected</h2><p>Appointment requests include a patient’s name, age, gender, mobile number, optional email, preferred specialty and clinician, date, time, reason for the visit and any additional message. General inquiries include a name, email and message. Consent and submission timestamps are recorded.</p>
+      <h2>How it is used</h2><p>Details are encrypted and stored in a private Supabase vault. They are made available only through server-side APIs to authenticated staff with an explicitly assigned administrative role. Information is intended solely for appointment coordination and inquiry handling. This site is an independent implementation; official hospital participation is not confirmed.</p>
+      <h2>No automatic notifications</h2><p>Email and SMS delivery are not configured. Saving a form does not contact the hospital, and neither a saved request nor a reference number guarantees an appointment. This portal must not be relied on for urgent care.</p>
+      <h2>Access and security</h2><p>Staff access requires authentication and server-side authorization. Public visitors cannot retrieve patient records. Rate-limiting uses a hashed network identifier, not a raw IP address. Patient records are never placed in public URLs or browser storage. Staff authentication sessions may be stored by the authentication provider in the staff browser.</p>
+      <h2>Retention and your choices</h2><p>Records remain until an authorized administrator removes them; automated retention is not yet configured. Use the general inquiry form to request correction or deletion, sharing only your reference and contact details—not your full medical history. Identity must be verified by staff before any record is changed or disclosed. No response time is guaranteed until the portal is officially operated.</p>
+      <h2>Children and third-party services</h2><p>A parent or guardian must authorize requests for a child. The embedded Google Map connects to Google and is subject to its privacy practices. Google Fonts may receive standard browser connection data. No advertising analytics have been added.</p>
+      <Link className="button outline" to="/contact">Contact the portal team</Link>
+    </> : <>
+      <div className="information-note"><ShieldCheck /><p><strong>Last content review: 9 November 2026.</strong> Public directory information is not equivalent to direct hospital verification. Current affiliations, availability and clinical services may change.</p></div>
+      <h2>Hospital identity and location</h2><p>The supplied Google Maps pin identifies Lion Kartar Singh Hospital at coordinates 19.1242612, 72.8409879. Public healthcare listings describe the address as Dadabhai Road, near Janardan Apartment and Navrang Talkies, Andheri West, Mumbai. Postal codes differ between listings, so none is asserted here.</p>
+      <h2>Medical information</h2><p>Practo supports the listed ophthalmology, general medicine, dentistry, cosmetology and gynecology/obstetrics specialties, the listed bed count, and four clinician profiles. Lybrate supports the ENT listing and Dr. Priyank Dhaval Talati’s qualifications. Directory-reported experience is not recalculated or treated as an independently verified credential. This site offers no medical diagnosis, treatment advice or guaranteed outcomes.</p>
+      <h2>Primary public sources</h2><div className="sources-list">{hospital.sources.map(source => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><span>{source.label}</span><ExternalLink size={17} /></a>)}</div>
+      <h2>What has not been confirmed</h2><p>Official phone numbers, hospital email, opening hours, emergency facilities, ownership, founding date, official mission, accreditations, equipment and current staff affiliation are not confirmed. They are not invented on this website. Publicly listed specialties are not represented as confirmed daily services.</p>
+      <h2>Images and testimonials</h2><p>The architectural image is AI-generated, fictional and labelled as a concept wherever used. It is not an image of the existing hospital or a planned construction project. Actual exterior, reception, interiors, facilities and staff photographs require permission before publication. Doctor cards use neutral illustration rather than unrelated portraits. Patient testimonials have not been reproduced because independent verification and reuse permission are unavailable.</p>
+      <h2>Booking and communication limits</h2><p>Requests are persistently stored in an encrypted Supabase vault and can be managed by authorized portal staff. Hospital affiliation has not been verified. No email or SMS is sent. The service is not a live hospital scheduling integration and no real-time availability is claimed.</p>
+    </>}</article>
+  </>;
+}
